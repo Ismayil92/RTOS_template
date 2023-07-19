@@ -1,0 +1,5 @@
+build
+external/FreeRTOS/*
+external/FreeRTOS-Plus/*
+external/libopencm3/*
+external/stlink/*
