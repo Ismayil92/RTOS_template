@@ -20,7 +20,7 @@ FREERTOS_SRC = $(FREERTOS_SRC_DIR)/tasks.c $(FREERTOS_SRC_DIR)/queue.c $(FREERTO
 				$(FREERTOS_SRC_DIR)/timers.c $(FREERTOS_SRC_DIR)/event_groups.c $(FREERTOS_SRC_DIR)/portable/$(PORT_NAME)/port.c
 
 
-CFILES = src/main.c $(FREERTOS_SRC)
+CFILES = src/main.c $(FREERTOS_SRC) src/usbd.c
 INCLUDES = -I$(PROJECT_ROOT)/include $(FREERTOS_INCLUDES)
 LDSCRIPT = $(PROJECT_ROOT)/generated.stm32f401ret6.ld 
 
