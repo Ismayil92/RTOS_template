@@ -5,7 +5,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
-//libopencm3  modules
+//libopencm3  modulesk
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/syscfg.h>
@@ -17,6 +17,9 @@
 // BUFFER
 static uint16_t state_buffer[4];
 
+
+
+
 int main(void)
 {
 
@@ -24,6 +27,7 @@ int main(void)
 
     //set the clock
     rcc_clock_setup_pll(&rcc_hse_8mhz_3v3[RCC_CLOCK_3V3_84MHZ]);
+    rcc_periph_clock_enable(RCC_GPIOA);
     rcc_periph_clock_enable(RCC_OTGFS);
     RCC_CSR |= RCC_CSR_LSION;
 

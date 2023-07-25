@@ -27,6 +27,30 @@ usbd_device* usb_initialize(void)
 	return usbd_dev;
 }
 
+static enum usbd_request_return_codes cdcacm_control_request(
+	usbd_device *usbd_dev,
+	struct usb_setup_data *req, uint8_t **buf, uint16_t *len,
+	void (**complete)(usbd_device *usbd_dev, struct usb_setup_data *req))
+{
+	(void)complete;
+	(void)buf;
+	(void)usbd_dev;
+
+	switch (req->bRequest)
+	{
+	case USB_CDC_REQ_SET_CONTROL_LINE_STATE:
+	{
+		return USBD_REQ_HANDLED;
+	}
+	case USB_CDC_REQ_SET_LINE_CODING:
+		if (*len < sizeof(struct usb_cdc_line_coding))
+		{
+			return USBD_REQ_NOTSUPP;
+		}
+		return USBD_REQ_HANDLED;
+	}
+	return USBD_REQ_NOTSUPP;
+}
 
 void cdcacm_set_config(usbd_device *usbd_dev, uint16_t wValue)
 {
