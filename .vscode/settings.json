@@ -3,6 +3,8 @@
         "stdio.h": "c",
         "compare": "cpp",
         "rcc.h": "c",
-        "usbd.h": "c"
+        "usbd.h": "c",
+        "gpio.h": "c",
+        "freertos.h": "c"
     }
 }
