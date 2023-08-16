@@ -52,18 +52,23 @@
 #define configUSE_PREEMPTION			1
 #define configUSE_IDLE_HOOK				1
 #define configUSE_TICK_HOOK				1
-#define configCPU_CLOCK_HZ				( 84000000 )
+#define configCPU_CLOCK_HZ				( (unsigned long) 84000000UL )
+#define configSYSTICK_CLOCK_HZ 			( configCPU_CLOCK_HZ / 8 )
 #define configTICK_RATE_HZ				( ( TickType_t ) 1000 )
-#define configMAX_PRIORITIES			( 5 )
+#define configMAX_PRIORITIES			( 15 )
 #define configMINIMAL_STACK_SIZE		( ( unsigned short ) 130 )
+#define configSUPPORT_DYNAMIC_ALLOCATION 1
+// #define configSUPPORT_STATIC_ALLOCATION 1
 #define configTOTAL_HEAP_SIZE			( ( size_t ) ( 75 * 1024 ) )
 #define configMAX_TASK_NAME_LEN			( 10 )
 #define configUSE_TRACE_FACILITY		1
-#define configUSE_16_BIT_TICKS			0
+#define configUSE_16_BIT_TICKS			1 // it s better for 32 bit processors
 #define configIDLE_SHOULD_YIELD			1
 #define configUSE_MUTEXES				1
-#define configQUEUE_REGISTRY_SIZE		8
-#define configCHECK_FOR_STACK_OVERFLOW	2
+#define configUSE_QUEUE_SETS			1
+#define configUSE_TIME_SLICING			1
+#define configQUEUE_REGISTRY_SIZE		8 //it defines the max number of queues and semaphores that can be registered - it s for debugging purpose
+#define configCHECK_FOR_STACK_OVERFLOW	0
 #define configUSE_RECURSIVE_MUTEXES		1
 #define configUSE_MALLOC_FAILED_HOOK	1
 #define configUSE_APPLICATION_TASK_TAG	0
@@ -71,9 +76,10 @@
 #define configGENERATE_RUN_TIME_STATS	0
 
 
+
 /* Software timer definitions. */
 #define configUSE_TIMERS				1
-#define configTIMER_TASK_PRIORITY		( 2 )
+#define configTIMER_TASK_PRIORITY		( 10 )
 #define configTIMER_QUEUE_LENGTH		10
 #define configTIMER_TASK_STACK_DEPTH	( configMINIMAL_STACK_SIZE * 2 )
 
@@ -118,9 +124,9 @@ header file. */
 
 /* Definitions that map the FreeRTOS port interrupt handlers to their CMSIS
 standard names. */
-#define vPortSVCHandler SVC_Handler
-#define xPortPendSVHandler PendSV_Handler
-#define xPortSysTickHandler SysTick_Handler
+#define vPortSVCHandler sv_call_handler
+#define xPortPendSVHandler pend_sv_handler
+#define xPortSysTickHandler sys_tick_handler
 
 
 #endif

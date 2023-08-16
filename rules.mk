@@ -167,7 +167,7 @@ $(PROJECT).elf: $(OBJS) $(LDSCRIPT) $(LIBDEPS)
 
 %.flash: %.bin
 	@printf "  FLASH\t$<\n"
-	./external/stlink/build/Release/bin/st-flash --debug --format binary --connect-under-reset --reset --opt  write  $(BUILD_DIR)/$< 0x8000000  
+	external/stlink/build/Release/bin/st-flash --debug --format binary --connect-under-reset --reset --opt  write  $(BUILD_DIR)/$< 0x8000000  
 #ifeq (,$(OOCD_FILE))
 #	$(Q)(echo "halt; program $(realpath $(BUILD_DIR)/$(*).elf) verify reset" | nc -4 localhost 4444 2>/dev/null) || \
 #		$(OOCD) -f interface/$(OOCD_INTERFACE).cfg \
